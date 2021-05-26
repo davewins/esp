@@ -7,6 +7,7 @@ import { LaserComponent } from './laser/laser.component';
 import { StepperComponent } from './stepper/stepper.component';
 import { OriginalstepperComponent } from './originalstepper/originalstepper.component';
 import { LibrariesComponent } from './libraries/libraries.component';
+import { AdminComponent } from './admin/admin.component';
 
 @NgModule({
   declarations: [
@@ -14,7 +15,8 @@ import { LibrariesComponent } from './libraries/libraries.component';
     LaserComponent,
     StepperComponent,
     OriginalstepperComponent,
-    LibrariesComponent
+    LibrariesComponent,
+    AdminComponent
   ],
   imports: [
     BrowserModule,
