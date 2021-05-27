@@ -1,7 +1,7 @@
 
-#include <ESPEssentials.h>
+#include "ESPEssentials.h"
 
-#include "RemoteDebug.h"  //https://github.com/JoaoLopesF/RemoteDebug
+#include <RemoteDebug.h>  //https://github.com/JoaoLopesF/RemoteDebug
 
 
 // Adafruit MCP23017 I/O expander library
@@ -41,28 +41,31 @@ RemoteDebug Debug;
 void laser_on() {
   mcp.digitalWrite(LASERPIN, HIGH);
   Debug.println("Laser ON");
-  WebServer.send(200, "text/plain", "Laser On");
+  const char* response="{\"ResponseBody\":\"Laser On\"}";
+  WebServer.send(200, "application/json", response);
 }
 
 //Turn off the Laser!
 void laser_off() {
   mcp.digitalWrite(LASERPIN, LOW);
   Debug.println("Laser OFF");
-  WebServer.send(200, "text/plain", "Laser Off");
+  const char* response="{\"ResponseBody\":\"Laser Off\"}";
+  WebServer.send(200, "application/json", response);
 }
 
 //Flash the Laser!
 void flash_laser(int timepersecond, int totalseconds) {
   //mcp.digitalWrite(GPB6, LOW);
   Debug.println("Flashing Laser");
-  WebServer.send(200, "text/plain", "Laser Flashing");
+  const char* response="{\"ResponseBody\":\"Laser Flashing\"}";
+  WebServer.send(200, "application/json", response);
 }
 
 void handle_laser_flash() {
   int timespersecond = (WebServer.arg("timespersecond").toInt());
   int totalseconds = (WebServer.arg("totalseconds").toInt());
-  WebServer.send(200, "text/plain", "Laser Flashing");
-
+  const char* response="{\"ResponseBody\":\"Laser Flashing\"}";
+  WebServer.send(200, "application/json", response);
 }
 
 // Process FORM arguments from main motors web page

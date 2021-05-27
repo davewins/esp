@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
+
+    <title>ESPLASER!</title>
+  </head>
+  <body class="bg-dark">
+
+    <header>
+      <div class="bg-dark" id="navbarHeader">
+
+
+        <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+          <div class="container-fluid">
+            <a class="navbar-brand" href="/index.htm"></a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+        
+          <div class="collapse navbar-collapse" id="navbarContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item"><a class="nav-link active" href="/index.htm">Home</a></li>
+              <li class="nav-item"><a class="nav-link" href="/indexB.htm">Original Stepper Page</a></li>
+              <li class="nav-item"><a href="/Steppers.htm" class="nav-link">Stepper Testing</a></li>
+              <li class="nav-item"><a href="/Laser.htm" class="nav-link">Laser Testing</a></li>
+              <li class="nav-item"><a href="/Libraries.htm" class="nav-link">Libraries</a></li>
+              </ul>
+          </div>
+          </div>
+        </nav>
+
+      </div>
+  </header>
+
+    <div class="container bg-dark text-light" id="featured-3">
+      <h2 class="pb-2 border-bottom">Laser Testing</h2>
+      <div class="row g-4 py-5 row-cols-1 row-cols-lg-3">
+        <div class="col align-items-start">
+          <h2>Turn Laser On</h2>
+          <p>Use this link to Turn the laser on</p>
+            <button class="btn btn-primary" type="submit" onclick="laserCommand('/laseron')">Laser On</button>
+        </div>
+        <div class="col align-items-start">
+          <div class="feature-icon bg-primary bg-gradient">
+          </div>
+          <h2>Laser Off</h2>
+          <p>Use this link to Turn the laser off</p>
+          <button class="btn btn-primary" type="submit" onclick="laserCommand('/laseroff')">Laser Off</button>
+        </div>
+        <div class="feature col">
+          <div class="feature-icon bg-primary bg-gradient">
+          </div>
+          <h2>Flash Laser</h2>
+          <p>Update the settings you want to alter how the laser flashes</p>
+          <button class="btn btn-primary" type="submit" onclick="laserCommand('/laserflash')">Flash Laser</button>
+        </div>
+      </div>
+    </div>
+
+  </body>
+  <script>
+
+    const laserCommand = async (command) => {
+      const response = await fetch(command, {
+      method: 'GET',
+        //body: myBody, // string or object
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      });
+      const myJson = await response.json(); //extract JSON from the http response
+      // do something with myJson
+      console.log(myJson);
+      alert("Received: " + myJson.ResponseBody);
+    }
+  </script>
+</html>
