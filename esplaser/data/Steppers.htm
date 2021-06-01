@@ -51,26 +51,21 @@
         </header>
 
         <div class="container bg-dark text-light" id="featured-3">
-            <h2 class="pb-2 border-bottom">Laser Testing</h2>
+            <h2 class="pb-2 border-bottom">Stepper Testing</h2>
             <div class="row g-4 py-5 row-cols-1 row-cols-lg-3">
                 <div class="col align-items-start">
-                    <h2>Turn Laser On</h2>
-                    <p>Use this link to Turn the laser on</p>
-                    <button class="btn btn-primary" type="submit" onclick="laserCommand('/laseron')">Laser On</button>
+                    <h2>Home Steppers</h2>
+                    <p>Use this link to test homing the steppers</p>
+                    <button class="btn btn-primary" type="submit" onclick="stepperCommand('/homing')">Home Steppers</button>
                 </div>
-                <div class="col align-items-start">
-                    <div class="feature-icon bg-primary bg-gradient"></div>
-                    <h2>Laser Off</h2>
-                    <p>Use this link to Turn the laser off</p>
-                    <button class="btn btn-primary" type="submit" onclick="laserCommand('/laseroff')">Laser Off</button>
-                </div>
+
                 <div class="feature col">
                     <div class="feature-icon bg-primary bg-gradient"></div>
-                    <h2>Flash Laser</h2>
-                    <p>Update the settings you want to alter how the laser flashes</p>
-                    <form method='post' action='#' name='flashForm' class='form' onsubmit="laserFlashCommand()">
+                    <h2>Do something</h2>
+                    <p>Do something with this form</p>
+                    <form method='post' action='#' name='stepperForm' class='form' onsubmit="">
                         <p>
-                            <span>For how many times per second?
+                            <span>Some stuff?
                                 <input type='text' name='timespersecond' id='timespersecond' value='2' size='3' maxlength='3' pattern="[0-9]*" required/></span>
                         </p>
                         <p>
@@ -78,17 +73,16 @@
                                 <input type='text' name='totalseconds' id='totalseconds' value='10' size='3' maxlength='3' pattern="[0-9]*" required/></span>
                         </p>
                         <p>
-                            <input class="btn btn-primary" type='submit' name='run' value='Flash Laser'/>
+                            <input class="btn btn-primary" type='submit' name='run' value='xyz'/>
                         </p>
                     </form>
-                   <!-- <button class="btn btn-primary" type="submit" onclick="laserCommand('/laserflash')">Flash Laser</button> -->
                 </div>
             </div>
         </div>
 
     </body>
     <script>
-        const laserCommand = async (command) => {
+        const stepperCommand = async (command) => {
             const response = await fetch(command, {
                 method: 'GET',
                 //body: myBody, // string or object
@@ -103,24 +97,5 @@
             alert("Received: " + myJson.ResponseBody);
         }
 
-        const laserFlashCommand = async () => {
-            //console.log("formdata: ",document.getElementById("timespersecond").value);
-            var timespersecond=document.getElementById("timespersecond").value;
-            var totalseconds=document.getElementById("totalseconds").value;
-            var command="/laserflash?timespersecond="+timespersecond+"&totalseconds="+totalseconds;
-            console.log("Command = " + command);
-            const response = await fetch(command, {
-                method: 'GET',
-                //body: myBody, // string or object
-                //headers: {
-                //    'Content-Type': 'application/json'
-                //}
-            });
-            const myJson = await response.json();
-            // extract JSON from the http response
-            // do something with myJson
-            console.log(myJson);
-            alert("Received: " + myJson.ResponseBody);
-        }
     </script>
 </html>
