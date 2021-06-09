@@ -23,6 +23,16 @@ void handle_laser_flash() {
   flashlaser(timespersecond,totalseconds);
 }
 
+void handle_laser_read() {
+  laseron();
+  int laservalue = analogRead(LASERDETECTOR);
+  Serial.printf("Static Laser Value: %d ",laservalue); 
+  delay(1000);
+  laseroff();
+  const char* response="{\"ResponseBody\":\"Laser Reading\"}";
+  WebServer.send(200, "application/json", response);
+}
+
 
 //The Actual functions
 void laseron() {

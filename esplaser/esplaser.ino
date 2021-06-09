@@ -13,6 +13,7 @@ Adafruit_MCP23017 mcp;
 // use pinMode() / digitalRead() / digitalWrite()
 #define STEP1       14
 #define STEP2       12
+#define LASERDETECTOR A0
 
 // MCP GPIOs
 // use mcp.pinMode() / mcp.digitalRead() / mcp.digitalWrite()
@@ -34,13 +35,13 @@ Adafruit_MCP23017 mcp;
 #define LIMIT2      15  // GPB7
 #define LASERPIN    GPB6
 
+
 RemoteDebug Debug;
 
 
 void setup()
 {
   initESPEssentials("ESPLaser");// Initialize the server (telnet or web socket) of RemoteDebug
-
   Debug.begin("ESPLaser");
   // OR
   //Debug.begin(HOST_NAME, startingDebugLevel);
@@ -57,10 +58,13 @@ void setup()
   WebServer.on("/laseron", HTTP_GET, laser_on);                 //inside laserfunctions.ino
   WebServer.on("/laseroff", HTTP_GET, laser_off);               //inside laserfunctions.ino
   WebServer.on("/laserflash", HTTP_GET, handle_laser_flash);    //inside laserfunctions.ino
+  WebServer.on("/laserread", HTTP_GET, handle_laser_read);      //inside laserfunctions.ino  
   WebServer.on("/homing", HTTP_GET, homing);                    //inside steppers.ino
 
   mcp.begin ();
   mcp.pinMode(LASERPIN, OUTPUT);
+  pinMode(LASERDETECTOR, INPUT); // analog
+
 }
 
 void loop()
